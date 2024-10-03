@@ -1,0 +1,23 @@
+apiVersion: builtin
+kind: PatchTransformer
+metadata:
+  name: grant-arke-networkpolicy-permission
+patch: |-
+  - op: add
+    path: /rules/-
+    value:
+      apiGroups:
+      - networking.k8s.io
+      resources:
+      - networkpolicies
+      verbs:
+      - create
+      - get
+      - list
+      - watch
+      - update
+      - remove
+      - delete
+target:
+  kind: Role
+  annotationSelector: sas.com/component-name=sas-arke

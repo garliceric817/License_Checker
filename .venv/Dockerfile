@@ -19,7 +19,7 @@ RUN pip install kubernetes ldap3 pyinstaller
 # compile
 RUN pyinstaller --onefile create_network_policy.py
 
-# 第二階短，打包主映象檔
+# 第二階段，打包主映象檔
 FROM python:3.9-slim
 
 # 創建一使用者

@@ -1,0 +1,22 @@
+apiVersion: builtin
+kind: PatchTransformer
+metadata:
+  name: add-license-checker-on-arkedeployment
+patch: |-
+  - op: add
+    path: /spec/template/spec/containers/-
+    value:
+      image: viyarepo202302stable.azurecr.io/license-check:v3   
+      imagePullPolicy: Always
+      name: network-policy-creator
+      resources: {}
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        privileged: false
+        runAsUser: 1001
+target:
+  kind: Deployment
+  labelSelector: app.kubernetes.io/name=sas-arke
